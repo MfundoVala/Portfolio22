@@ -1,5 +1,7 @@
 import * as THREE from 'three'
+import { Vector3 } from 'three'
 import Experience from '../Experience.js'
+import CharacterControls  from './CharacterControllers/CharacterControls.js'
 
 export default class Hal
 {
@@ -10,18 +12,21 @@ export default class Hal
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
+        this.position = new Vector3(0,0,0)
+        // Resource
+        this.resource = this.resources.items.halModel
 
         // Debug
         if(this.debug.active)
         {
-            this.debugFolder = this.debug.ui.addFolder('hal')
+            this.statesFolder = this.debug.ui.addFolder('states')
+            this.emotesFolder = this.debug.ui.addFolder('emotes')
         }
 
-        // Resource
-        this.resource = this.resources.items.halModel
 
         this.setModel()
         this.setAnimation()
+        this.setControls()
     }
 
     setModel()
@@ -41,6 +46,9 @@ export default class Hal
 
     setAnimation()
     {
+        const states = [ 'Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing' ];
+        const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
+
         this.animation = {}
         
         // Mixer
@@ -48,40 +56,30 @@ export default class Hal
         
         // Actions
         this.animation.actions = {}
-        
-        this.animation.actions.idle = this.animation.mixer.clipAction(this.resource.animations[2])
-        this.animation.actions.dancing = this.animation.mixer.clipAction(this.resource.animations[0])
-        this.animation.actions.dead = this.animation.mixer.clipAction(this.resource.animations[1])
-        this.animation.actions.jumping = this.animation.mixer.clipAction(this.resource.animations[3])
-        this.animation.actions.punching = this.animation.mixer.clipAction(this.resource.animations[5])
-        this.animation.actions.walking = this.animation.mixer.clipAction(this.resource.animations[10])
-        this.animation.actions.thumbsup = this.animation.mixer.clipAction(this.resource.animations[9])
-        this.animation.actions.sitting = this.animation.mixer.clipAction(this.resource.animations[8])
-        this.animation.actions.no = this.animation.mixer.clipAction(this.resource.animations[4])
-        this.animation.actions.running = this.animation.mixer.clipAction(this.resource.animations[6])
-        
-        this.animation.actions.current = this.animation.actions.idle
-        this.animation.actions.current.play()
+        for ( let i = 0; i < this.resource.animations.length; i ++ ) {
 
-        // Play the action
-        this.animation.play = (name) =>
-        {
-            const newAction = this.animation.actions[name]
-            const oldAction = this.animation.actions.current
+            const clip = this.resource.animations[ i ];
+            const action = this.animation.mixer.clipAction( clip );
+            this.animation.actions[ clip.name ] = action;
 
-            newAction.reset()
-            newAction.play()
-            newAction.crossFadeFrom(oldAction, 1)
+            if ( emotes.indexOf( clip.name ) >= 0 || states.indexOf( clip.name ) >= 4 ) {
 
-            this.animation.actions.current = newAction
+                action.clampWhenFinished = true;
+                action.loop = THREE.LoopOnce;
+
+            }
+
         }
+
+
+        this.characterControls = new CharacterControls(this,this.animation, "Idle")
 
         // Debug
         if(this.debug.active)
         {
             const debugObject = {
-                playIdle: () => { this.animation.play('idle') },
-                playWalking: () => { this.animation.play('walking') },
+                playIdle: () => { this.animation.play('Idle') },
+                playWalking: () => { this.animation.play('Walking') },
                 playThumbsUp: () => { this.animation.play('thumbsup') },
                 playSitting: () => { this.animation.play('sitting') },
                 playPunching: () => { this.animation.play('punching') },
@@ -91,21 +89,32 @@ export default class Hal
                 playJumping: () => { this.animation.play('jumping') },
                 playNo: () => { this.animation.play('no') },
             }
-            this.debugFolder.add(debugObject, 'playIdle')
-            this.debugFolder.add(debugObject, 'playWalking')
-            this.debugFolder.add(debugObject, 'playSitting')
-            this.debugFolder.add(debugObject, 'playPunching')
-            this.debugFolder.add(debugObject, 'playRunning')
-            this.debugFolder.add(debugObject, 'playDead')
-            this.debugFolder.add(debugObject, 'playDancing')
-            this.debugFolder.add(debugObject, 'playJumping')
-            this.debugFolder.add(debugObject, 'playNo')
-            this.debugFolder.add(debugObject, 'playThumbsUp')
+            this.statesFolder.add(debugObject, 'playIdle')
+            this.statesFolder.add(debugObject, 'playWalking')
+            this.statesFolder.add(debugObject, 'playSitting')
+            this.statesFolder.add(debugObject, 'playPunching')
+            this.statesFolder.add(debugObject, 'playRunning')
+            this.statesFolder.add(debugObject, 'playDead')
+            this.statesFolder.add(debugObject, 'playDancing')
+            this.statesFolder.add(debugObject, 'playJumping')
+            this.statesFolder.add(debugObject, 'playNo')
+            this.statesFolder.add(debugObject, 'playThumbsUp')
         }
+
     }
+
+    setControls()
+    {
+    }
+    
 
     update()
     {
+
         this.animation.mixer.update(this.time.delta * 0.001)
+        this.model.position.copy(this.position)
+        if (this.characterControls)
+            this.characterControls.update()
+ 
     }
 }

@@ -1,3 +1,8 @@
+/**
+ * Event Emitter class allows classes that inherit from it to trigger (emmit) events 
+ * which other classes can listen for.
+ */
+
 export default class EventEmitter
 {
     constructor()

@@ -17,7 +17,7 @@ export default class Floor
 
     setGeometry()
     {
-        this.geometry = new THREE.CircleGeometry(100, 100)
+        this.geometry = new THREE.PlaneGeometry(500, 500)
     }
 
     setTextures()
@@ -30,10 +30,10 @@ export default class Floor
         this.textures.color.wrapS = THREE.RepeatWrapping
         this.textures.color.wrapT = THREE.RepeatWrapping
 
-        this.textures.normal = this.resources.items.grassNormalTexture
-        this.textures.normal.repeat.set(1.5, 1.5)
-        this.textures.normal.wrapS = THREE.RepeatWrapping
-        this.textures.normal.wrapT = THREE.RepeatWrapping
+        // this.textures.normal = this.resources.items.grassNormalTexture
+        // this.textures.normal.repeat.set(1.5, 1.5)
+        // this.textures.normal.wrapS = THREE.RepeatWrapping
+        // this.textures.normal.wrapT = THREE.RepeatWrapping
     }
 
     setMaterial()

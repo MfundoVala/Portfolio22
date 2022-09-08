@@ -32,4 +32,9 @@ export default [
         type: 'gltfModel',
         path: 'models/RobotExpressive/RobotExpressive.glb'
     },
+    {
+        name: 'letters',
+        type: 'gltfModel',
+        path: 'models/letters/wethinkcode.glb'
+    },
 ]

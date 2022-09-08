@@ -39,6 +39,19 @@ export default class Experience
         this.renderer = new Renderer()
         this.world = new World()
 
+        this.scene.background = new THREE.Color( 0xffff );
+
+        //keys
+        document.addEventListener('keydown',(event)=>{
+            console.log(event.keyCode)
+            this.world.player.characterControls.keysPressed[event.keyCode] = true
+        })
+
+        document.addEventListener('keyup',(event)=>{
+            console.log(event.keyCode)
+            this.world.player.characterControls.keysPressed[event.keyCode] = false
+        })
+
         // Resize event
         this.sizes.on('resize', () =>
         {
@@ -94,6 +107,7 @@ export default class Experience
 
         this.camera.controls.dispose()
         this.renderer.instance.dispose()
+
 
         if(this.debug.active)
             this.debug.ui.destroy()

@@ -10,6 +10,7 @@ export default class Camera
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
+        this.player = this.experience.player
 
         this.setInstance()
         this.setControls()
@@ -17,8 +18,9 @@ export default class Camera
 
     setInstance()
     {
-        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100)
-        this.instance.position.set(6, 4, 8)
+        this.instance = new THREE.PerspectiveCamera(70, this.sizes.width / this.sizes.height, 0.01, 100)
+        this.instance.position.set( 0, 0, -16 );
+
         this.scene.add(this.instance)
     }
 
@@ -37,5 +39,12 @@ export default class Camera
     update()
     {
         this.controls.update()
+        if(this.experience.world.player)
+            // console.log(this.experience.world.player)
+            this.instance.lookAt(this.experience.world.player.position)
+            if(this.experience.world.cameraTempPos)
+                this.instance.position.lerp(this.experience.world.cameraTempPos, 0.2);
+
+
     }
 }
