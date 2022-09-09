@@ -39,6 +39,7 @@ export default class Hal
         {
             if(child instanceof THREE.Mesh)
             {
+                
                 child.castShadow = true
             }
         })
