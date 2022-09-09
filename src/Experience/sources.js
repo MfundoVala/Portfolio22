@@ -37,4 +37,9 @@ export default [
         type: 'gltfModel',
         path: 'models/letters/wethinkcode.glb'
     },
+    {
+        name: 'skydome',
+        type: 'gltfModel',
+        path: 'models/Sky/skydome.glb'
+    },
 ]

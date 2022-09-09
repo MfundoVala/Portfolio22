@@ -19,7 +19,8 @@ export default class World
             // Setup
             this.floor = new Floor()
             this.player = new Hal()
-            this.letters = new Letters()
+            this.letters = new Letters('letters',160, true)
+            this.skyDome = new Letters('skydome',0, false)
             this.environment = new Environment()
             this.cameraPos = new THREE.Object3D
             this.cameraTempPos = new THREE.Vector3
@@ -35,6 +36,9 @@ export default class World
         
         if(this.letters)
             this.letters.update()
+
+        if(this.skyDome)
+            this.skyDome.update()
         
         if(this.cameraPos)
             this.cameraTempPos.setFromMatrixPosition(this.cameraPos.matrixWorld)

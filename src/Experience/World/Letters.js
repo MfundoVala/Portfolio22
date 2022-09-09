@@ -4,16 +4,17 @@ import Experience from '../Experience.js'
 
 export default class Letters
 {
-    constructor()
+    constructor(model,position,cast)
     {
+        this.cast = cast
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-        this.position = new Vector3(0,0,160)
+        this.position = new Vector3(0,0,position)
         // Resource
-        this.resource = this.resources.items.letters
+        this.resource = this.resources.items[model]
 
         this.setModel()
         this.update()
@@ -32,7 +33,7 @@ export default class Letters
         {
             if(child instanceof THREE.Mesh)
             {
-                child.castShadow = true
+                child.castShadow = this.cast
             }
         })
     }
@@ -40,6 +41,6 @@ export default class Letters
 
     update()
     {
-        this.position.z+=0.5
+        // this.position.z+=0.5
     }
 }
