@@ -42,4 +42,9 @@ export default [
         type: 'gltfModel',
         path: 'models/Sky/skydome.glb'
     },
+    {
+        name: 'trees',
+        type: 'gltfModel',
+        path: 'models/Terrain/trees.glb'
+    },
 ]

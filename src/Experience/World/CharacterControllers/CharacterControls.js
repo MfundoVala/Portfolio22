@@ -27,8 +27,8 @@ export default class CharacterControls {
                 // console.log(typeof oldAction)
                 oldAction.fadeOut(0.5)
             if (newAction !== oldAction){
-            newAction.reset()
-            newAction.play()
+                newAction.reset()
+                newAction.play()
             // if (typeof oldAction == typeof newAction)
             //     newAction.crossFadeFrom(oldAction, 1)
             }
@@ -48,8 +48,8 @@ export default class CharacterControls {
 
     // constants
     fadeDuration = 0.2
-    runVelocity = 5
-    walkVelocity = 2
+    runVelocity = 1
+    walkVelocity = 0.4
     // delta = player.time.delta
 
 
@@ -69,11 +69,14 @@ export default class CharacterControls {
 
         let directionOffset = this.directionOffset(this.keysPressed)
         // rotate model
-        this.rotateQuarternion.setFromAxisAngle(
-            this.rotateAngle,
-            -directionOffset
-        );
-        this.player.model.quaternion.rotateTowards(this.rotateQuarternion, 0.2);
+        if(directionPressed){
+            this.rotateQuarternion.setFromAxisAngle(
+                this.rotateAngle,
+                -directionOffset
+            );
+            this.player.model.quaternion.rotateTowards(this.rotateQuarternion, 0.2);
+        }
+
 
         // calculate direction
         this.walkDirection.y = 0;
@@ -81,27 +84,31 @@ export default class CharacterControls {
         this.walkDirection.applyAxisAngle(this.rotateAngle, directionOffset);
 
         // run/walk velocity
-        const velocity = play == 'Run' ? this.runVelocity : this.walkVelocity;
+        const velocity = this.keysPressed[82] ? this.runVelocity : this.walkVelocity;
         
         const moveX = this.walkDirection.x * velocity * delta
         // const moveZ = this.walkDirection.z * velocity * delta
         // this.player.position.x += moveX
         // this.player.position.z += moveZ
-
         
+        if(this.keysPressed[82])
+        {
+            play =  'Running'
+        }
+
         if(this.keysPressed[87]){
-            this.player.position.z+=0.4
+            this.player.position.z+=velocity
         }
 
         if(this.keysPressed[83]){
-            this.player.position.z-=0.4
+            this.player.position.z-=velocity
         }
         if(this.keysPressed[68])
-            this.player.position.x-=0.4
+            this.player.position.x-=velocity
 
 
         if(this.keysPressed[65])
-            this.player.position.x+=0.4
+            this.player.position.x+=velocity
 
         this.animation.play(play)
         this.animation.current = this.animation.actions[play]
