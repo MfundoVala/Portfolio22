@@ -6,7 +6,7 @@ import FontJSON from '../../../../static/assets/Roboto-msdf.json'
 import FontImg from '../../../../static/assets/Roboto-msdf.png'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
-export default class CharacterName {
+export default class CinemaScreen {
 
     constructor()
     {
@@ -15,7 +15,7 @@ export default class CharacterName {
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-        this.position = new Vector3(0,0,5)
+        this.position = new Vector3(144,22,150)
         document.body.appendChild( VRButton.createButton( this.experience.renderer ) );
 
         this.makeTextPanel()
@@ -24,9 +24,11 @@ export default class CharacterName {
     makeTextPanel() 
     {
         this.container = new ThreeMeshUI.Block( {
-            width: 4,
-            height: 2,
+            width: 50,
+            height: 30,
             padding: 0.05,
+            fontColor: new THREE.Color( 0x222222 ),
+            backgroundColor: new THREE.Color( 0xfffffff ),
             justifyContent: 'center',
             textAlign: 'center',
             fontFamily: FontJSON,
@@ -35,15 +37,15 @@ export default class CharacterName {
     
         this.container.position.copy(this.position);
         // this.container.rotation.x = +0.55;
-        this.container.rotation.y = Math.PI;
+        this.container.rotation.y = -Math.PI/2;
         this.scene.add( this.container );
     
         //
     
         this.container.add(
             new ThreeMeshUI.Text( {
-                content: 'HAL',
-                fontSize: 1
+                content: 'SPOVA',
+                fontSize: 14,
             } ),
     
         );
@@ -52,8 +54,8 @@ export default class CharacterName {
     update(){
         if(this.experience.world.player)
         // console.log(this.experience.world.player)
-            this.container.position.copy(this.experience.world.player.position)
-            this.container.position.y = 6
+            // this.container.position.copy(this.experience.world.player.position)
+            // this.container.position.y = 6
         this.container.set( {
                 // borderRadius: [ 0, 0.2 + 0.2 * Math.sin( Date.now() / 500 ), 0, 0 ],
                 borderWidth: 0.05 - 0.06 * Math.sin( Date.now() / 500 ),

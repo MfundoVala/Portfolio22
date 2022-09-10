@@ -36,10 +36,13 @@ export default class Experience
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera()
-        this.renderer = new THREE.WebGLRenderer()
+        this.renderer = new THREE.WebGLRenderer( {
+            antialias: true
+        })
         this.renderer.setPixelRatio( this.sizes.pixelRatio );
 	    this.renderer.setSize( this.sizes.width, this.sizes.height );
-        this.renderer.xr.enabled = true;
+        this.renderer.xr
+        .enabled = true;
         document.body.appendChild( this.renderer.domElement );
         
         this.world = new World()
