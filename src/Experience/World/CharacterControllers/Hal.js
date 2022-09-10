@@ -3,6 +3,7 @@ import { Vector3 } from 'three'
 import Experience from '../../Experience.js'
 import CharacterControls from './CharacterControls.js'
 import ThreeMeshUI from 'three-mesh-ui'
+import CharacterName from './CharacterName.js'
 
 
 export class Hal
@@ -14,7 +15,7 @@ export class Hal
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-        this.position = new Vector3(0,0,0)
+        this.position = new Vector3(110,0,145)
         // Resource
         this.resource = this.resources.items.halModel
 
@@ -36,6 +37,7 @@ export class Hal
         this.model = this.resource.scene
         // this.model.scale.set(0.02, 0.02, 0.02)
         this.scene.add(this.model)
+        this.namePanel = new CharacterName()
 
         this.model.traverse((child) =>
         {
@@ -112,8 +114,11 @@ export class Hal
 
         this.animation.mixer.update(this.time.delta * 0.001)
         this.model.position.copy(this.position)
+        console.log(this.position)
         if (this.characterControls)
             this.characterControls.update()
+        if(this.namePanel)
+            this.namePanel.update()
  
     }
 }

@@ -126,16 +126,16 @@ export default class CharacterControls {
             directionOffset = -Math.PI / 4; // w+d
           }
         } 
-        // else if (keysPressed[40]) 
-        // {
-        //   if (keysPressed[37]) {
-        //     directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
-        //   } else if (keysPressed[39]) {
-        //     directionOffset = -Math.PI / 4 - Math.PI / 2; // s+d
-        //   } else {
-        //     directionOffset = Math.PI; // s
-        //   }
-        // } 
+        else if (keysPressed[40]) 
+        {
+          if (keysPressed[37]) {
+            directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
+          } else if (keysPressed[39]) {
+            directionOffset = -Math.PI / 4 - Math.PI / 2; // s+d
+          } else {
+            directionOffset = Math.PI; // s
+          }
+        } 
         else if (keysPressed[37]) 
         {
           directionOffset = Math.PI / 2; // a

@@ -4,6 +4,7 @@ import Floor from './Floor.js'
 import { Hal } from './CharacterControllers/Hal.js'
 import Model from './Model.js'
 import * as THREE from 'three'
+import CinemaScreen from './UIcomponents/CinemaScreen.js'
 
 export default class World
 {
@@ -23,6 +24,7 @@ export default class World
             this.skyDome = new Model('skydome',0, false)
             this.trees = new Model('trees',0, false)
             this.cinema = new Model('cinema',0,false)
+            this.cinemaScreen = new CinemaScreen()
             this.environment = new Environment()
             this.cameraPos = new THREE.Object3D
             this.cameraTempPos = new THREE.Vector3
