@@ -23,6 +23,21 @@ export default [
         path: 'textures/dirt/normal.jpg'
     },
     {
+        name: 'malume',
+        type: 'texture',
+        path: 'assets/malume.jpg'
+    },
+    {
+        name: 'spova',
+        type: 'texture',
+        path: 'assets/spova.jpg'
+    },
+    {
+        name: 'keen',
+        type: 'texture',
+        path: 'assets/keen.jpg'
+    },
+    {
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'

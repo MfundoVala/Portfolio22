@@ -4,7 +4,6 @@ import * as ThreeMeshUI from 'three-mesh-ui'
 import Experience from '../../Experience.js'
 import FontJSON from '../../../../static/assets/Roboto-msdf.json'
 import FontImg from '../../../../static/assets/Roboto-msdf.png'
-import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
 export default class CharacterName {
 
@@ -16,7 +15,6 @@ export default class CharacterName {
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.position = new Vector3(0,0,5)
-        document.body.appendChild( VRButton.createButton( this.experience.renderer ) );
 
         this.makeTextPanel()
     }
