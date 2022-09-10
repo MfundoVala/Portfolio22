@@ -1,7 +1,9 @@
 import * as THREE from 'three'
+import Experience from '../../Experience'
 
 export default class CharacterControls {
     constructor(player, animation, firstAction){
+        this.experience = new Experience()
         this.run = false,
         this.currentAction,
         this.player = player,
@@ -95,6 +97,12 @@ export default class CharacterControls {
         {
             play =  'Running'
         }
+
+        if(this.experience.selectState)
+        {
+            play= 'Punch'
+        }
+
 
         if(this.keysPressed[38]){
             this.player.position.z+=velocity

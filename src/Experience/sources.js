@@ -38,6 +38,11 @@ export default [
         path: 'models/letters/wethinkcode.glb'
     },
     {
+        name: 'lettersmfundo',
+        type: 'gltfModel',
+        path: 'models/letters/mfundo.glb'
+    },
+    {
         name: 'skydome',
         type: 'gltfModel',
         path: 'models/Sky/skydome.glb'

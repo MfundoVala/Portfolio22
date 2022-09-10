@@ -51,7 +51,6 @@ export default class CharacterName {
 
     update(){
         if(this.experience.world.player)
-        // console.log(this.experience.world.player)
             this.container.position.copy(this.experience.world.player.position)
             this.container.position.y = 6
         this.container.set( {

@@ -55,6 +55,43 @@ export default class Experience
             this.world.player.characterControls.keysPressed[event.keyCode] = false
         })
 
+        // compute mouse position in normalized device coordinates
+        // (-1 to +1) for both directions.
+        // Used to raycasting against the interactive elements
+        this.objsToTest = [];
+
+        this.raycaster = new THREE.Raycaster();
+
+        this.mouse = new THREE.Vector2();
+        this.mouse.x = this.mouse.y = null;
+
+        this.selectState = false;
+
+        window.addEventListener( 'pointermove', ( event ) => {
+            this.mouse.x = ( event.clientX / this.sizes.width ) * 2 - 1;
+            this.mouse.y = -( event.clientY / this.sizes.height ) * 2 + 1;
+        } );
+
+        window.addEventListener( 'pointerdown', () => {
+            this.selectState = true;
+        } );
+
+        window.addEventListener( 'pointerup', () => {
+            this.selectState = false;
+        } );
+
+        window.addEventListener( 'touchstart', ( event ) => {
+            this.selectState = true;
+            this.mouse.x = ( event.touches[ 0 ].clientX / this.sizes.width ) * 2 - 1;
+            this.mouse.y = -( event.touches[ 0 ].clientY / this.sizes.height ) * 2 + 1;
+        } );
+
+        window.addEventListener( 'touchend', () => {
+            this.selectState = false;
+            this.mouse.x = null;
+            this.mouse.y = null;
+        } );
+
         // Resize event
         this.sizes.on('resize', () =>
         {
@@ -72,6 +109,28 @@ export default class Experience
     {
         this.camera.resize()
         this.renderer.resize()
+    }
+
+    raycast() {
+
+        return this.objsToTest.reduce( ( closestIntersection, obj ) => {
+    
+            const intersection = this.raycaster.intersectObject( obj, true );
+    
+            if ( !intersection[ 0 ] ) return closestIntersection;
+    
+            if ( !closestIntersection || intersection[ 0 ].distance < closestIntersection.distance ) {
+    
+                intersection[ 0 ].object = obj;
+    
+                return intersection[ 0 ];
+    
+            }
+    
+            return closestIntersection;
+    
+        }, null );
+    
     }
 
     update()

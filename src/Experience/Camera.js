@@ -40,9 +40,10 @@ export default class Camera
     {
         this.controls.update()
         if(this.experience.world.player)
-            // console.log(this.experience.world.player)
-            this.instance.lookAt(this.experience.world.player.position)
+
+            this.controls.target = this.experience.world.player.position
             this.instance.rotateX(0.4)
+            
             if(this.experience.world.cameraTempPos)
                 this.instance.position.lerp(this.experience.world.cameraTempPos, 0.2);
 

@@ -21,6 +21,7 @@ export default class World
             // this.floor = new Floor()
             this.player = new Hal()
             this.letters = new Model('letters',160, true)
+            // this.letters = new Model('lettersmfundo',250, true)
             this.skyDome = new Model('skydome',0, false)
             this.trees = new Model('trees',0, false)
             this.cinema = new Model('cinema',0,false)
@@ -37,6 +38,8 @@ export default class World
     {
         if(this.player)
             this.player.update()
+        if(this.cinemaScreen)
+            this.cinemaScreen.update()
         
         if(this.cameraPos)
             this.cameraTempPos.setFromMatrixPosition(this.cameraPos.matrixWorld)
