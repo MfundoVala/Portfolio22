@@ -47,4 +47,9 @@ export default [
         type: 'gltfModel',
         path: 'models/Terrain/trees.glb'
     },
+    {
+        name: 'cinema',
+        type: 'gltfModel',
+        path: 'models/Terrain/cinema.glb'
+    },
 ]

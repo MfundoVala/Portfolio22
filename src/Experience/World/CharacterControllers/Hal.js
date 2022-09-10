@@ -1,9 +1,11 @@
 import * as THREE from 'three'
 import { Vector3 } from 'three'
-import Experience from '../Experience.js'
-import CharacterControls  from './CharacterControllers/CharacterControls.js'
+import Experience from '../../Experience.js'
+import CharacterControls from './CharacterControls.js'
+import ThreeMeshUI from 'three-mesh-ui'
 
-export default class Hal
+
+export class Hal
 {
     constructor()
     {
@@ -26,7 +28,7 @@ export default class Hal
 
         this.setModel()
         this.setAnimation()
-        this.setControls()
+        // this.makeTextPanel()
     }
 
     setModel()
@@ -102,10 +104,6 @@ export default class Hal
             this.statesFolder.add(debugObject, 'playThumbsUp')
         }
 
-    }
-
-    setControls()
-    {
     }
     
 

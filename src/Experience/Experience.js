@@ -37,6 +37,7 @@ export default class Experience
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
+        
         this.world = new World()
 
         this.scene.background = new THREE.Color( 0xffff );
@@ -44,11 +45,13 @@ export default class Experience
         //keys
         document.addEventListener('keydown',(event)=>{
             console.log(event.keyCode)
+            if(this.world.player)
             this.world.player.characterControls.keysPressed[event.keyCode] = true
         })
 
         document.addEventListener('keyup',(event)=>{
             console.log(event.keyCode)
+            if(this.world.player)
             this.world.player.characterControls.keysPressed[event.keyCode] = false
         })
 

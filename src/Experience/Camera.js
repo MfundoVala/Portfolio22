@@ -19,7 +19,7 @@ export default class Camera
     setInstance()
     {
         this.instance = new THREE.PerspectiveCamera(70, this.sizes.width / this.sizes.height, 0.01, 20000)
-        this.instance.position.set( 0, 0, -16 );
+        this.instance.position.set( 0, 0, -26 );
 
         this.scene.add(this.instance)
     }
@@ -42,7 +42,7 @@ export default class Camera
         if(this.experience.world.player)
             // console.log(this.experience.world.player)
             this.instance.lookAt(this.experience.world.player.position)
-            this.instance.rotateX(0.5)
+            this.instance.rotateX(0.4)
             if(this.experience.world.cameraTempPos)
                 this.instance.position.lerp(this.experience.world.cameraTempPos, 0.2);
 

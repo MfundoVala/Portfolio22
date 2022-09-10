@@ -54,7 +54,7 @@ export default class CharacterControls {
 
 
     update() {
-        const KEYLIST = [87,83,65,68]
+        const KEYLIST = [37,38,39,40]
         const directionPressed = KEYLIST.some(key => this.keysPressed[key] == true)
 
         var play = '';
@@ -72,7 +72,7 @@ export default class CharacterControls {
         if(directionPressed){
             this.rotateQuarternion.setFromAxisAngle(
                 this.rotateAngle,
-                -directionOffset
+                directionOffset
             );
             this.player.model.quaternion.rotateTowards(this.rotateQuarternion, 0.2);
         }
@@ -84,31 +84,31 @@ export default class CharacterControls {
         this.walkDirection.applyAxisAngle(this.rotateAngle, directionOffset);
 
         // run/walk velocity
-        const velocity = this.keysPressed[82] ? this.runVelocity : this.walkVelocity;
+        const velocity = this.keysPressed[16] ? this.runVelocity : this.walkVelocity;
         
         const moveX = this.walkDirection.x * velocity * delta
         // const moveZ = this.walkDirection.z * velocity * delta
         // this.player.position.x += moveX
         // this.player.position.z += moveZ
         
-        if(this.keysPressed[82])
+        if(this.keysPressed[16])
         {
             play =  'Running'
         }
 
-        if(this.keysPressed[87]){
+        if(this.keysPressed[38]){
             this.player.position.z+=velocity
         }
 
-        if(this.keysPressed[83]){
+        if(this.keysPressed[40]){
             this.player.position.z-=velocity
         }
-        if(this.keysPressed[68])
-            this.player.position.x-=velocity
-
-
-        if(this.keysPressed[65])
+        if(this.keysPressed[37])
             this.player.position.x+=velocity
+
+
+        if(this.keysPressed[39])
+            this.player.position.x-=velocity
 
         this.animation.play(play)
         this.animation.current = this.animation.actions[play]
@@ -117,23 +117,31 @@ export default class CharacterControls {
     directionOffset(keysPressed) {
         var directionOffset = 0; // w
     
-        if (keysPressed[87]) {
-          if (keysPressed[68]) {
+        if (keysPressed[38]) 
+        {
+          if (keysPressed[37]) 
+          {
             directionOffset = Math.PI / 4; // w+a
-          } else if (keysPressed[65]) {
+          } else if (keysPressed[39]) {
             directionOffset = -Math.PI / 4; // w+d
           }
-        } else if (keysPressed[83]) {
-          if (keysPressed[68]) {
-            directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
-          } else if (keysPressed[65]) {
-            directionOffset = -Math.PI / 4 - Math.PI / 2; // s+d
-          } else {
-            directionOffset = Math.PI; // s
-          }
-        } else if (keysPressed[68]) {
+        } 
+        // else if (keysPressed[40]) 
+        // {
+        //   if (keysPressed[37]) {
+        //     directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
+        //   } else if (keysPressed[39]) {
+        //     directionOffset = -Math.PI / 4 - Math.PI / 2; // s+d
+        //   } else {
+        //     directionOffset = Math.PI; // s
+        //   }
+        // } 
+        else if (keysPressed[37]) 
+        {
           directionOffset = Math.PI / 2; // a
-        } else if (keysPressed[65]) {
+        } 
+        else if 
+        (keysPressed[39]) {
           directionOffset = -Math.PI / 2; // d
         }
         return directionOffset;
