@@ -36,7 +36,11 @@ export default class Experience
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera()
-        this.renderer = new Renderer()
+        this.renderer = new THREE.WebGLRenderer()
+        this.renderer.setPixelRatio( this.sizes.pixelRatio );
+	    this.renderer.setSize( this.sizes.width, this.sizes.height );
+        this.renderer.xr.enabled = true;
+        document.body.appendChild( this.renderer.domElement );
         
         this.world = new World()
 
@@ -71,14 +75,14 @@ export default class Experience
     resize()
     {
         this.camera.resize()
-        this.renderer.resize()
+        this.renderer.setSize( this.sizes.width, this.sizes.height );
     }
 
     update()
     {
         this.camera.update()
         this.world.update()
-        this.renderer.update()
+        this.renderer.render( this.scene, this.camera.instance );
     }
 
     destroy()
