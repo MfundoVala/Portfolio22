@@ -18,7 +18,6 @@ export default class CinemaUI {
         this.meshes = []
         this.currentMesh = 0
         // document.body.appendChild( VRButton.createButton( this.experience.renderer ) );
-
         this.makeCinemaScreen('malume')
         this.makeCinemaScreen('spova')
         this.makeCinemaScreen('keen')
@@ -85,7 +84,7 @@ export default class CinemaUI {
         // Options for component.setupState().
         // It must contain a 'state' parameter, which you will refer to with component.setState( 'name-of-the-state' ).
     
-        const hoveredStateAttributes = {
+        this.hoveredStateAttributes = {
             state: 'hovered',
             attributes: {
                 offset: 0.035,
@@ -95,7 +94,7 @@ export default class CinemaUI {
             },
         };
     
-        const idleStateAttributes = {
+        this.idleStateAttributes = {
             state: 'idle',
             attributes: {
                 offset: 0.035,
@@ -123,7 +122,7 @@ export default class CinemaUI {
         // Create states for the buttons.
         // In update, we call component.setState( 'state-name' ) when mouse hover or click
     
-        const selectedAttributes = {
+        this.selectedAttributes = {
             offset: 0.02,
             backgroundColor: new THREE.Color( 0x777777 ),
             fontColor: new THREE.Color( 0x222222 )
@@ -131,7 +130,7 @@ export default class CinemaUI {
     
         buttonNext.setupState( {
             state: 'selected',
-            attributes: selectedAttributes,
+            attributes: this.selectedAttributes,
             onSet: () => {
     
                 this.currentMesh = ( this.currentMesh + 1 ) % 3;
@@ -139,14 +138,14 @@ export default class CinemaUI {
     
             }
         } );
-        buttonNext.setupState( hoveredStateAttributes );
-        buttonNext.setupState( idleStateAttributes );
+        buttonNext.setupState( this.hoveredStateAttributes );
+        buttonNext.setupState( this.idleStateAttributes );
     
         //
     
         buttonPrevious.setupState( {
             state: 'selected',
-            attributes: selectedAttributes,
+            attributes: this.selectedAttributes,
             onSet: () => {
     
                 this.currentMesh -= 1;
@@ -155,8 +154,8 @@ export default class CinemaUI {
     
             }
         } );
-        buttonPrevious.setupState( hoveredStateAttributes );
-        buttonPrevious.setupState( idleStateAttributes );
+        buttonPrevious.setupState( this.hoveredStateAttributes );
+        buttonPrevious.setupState( this.idleStateAttributes );
     
         //
     
