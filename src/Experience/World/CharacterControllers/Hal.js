@@ -15,8 +15,8 @@ export class Hal
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-        this.position = new Vector3(110,0,140)
-        // this.position = new Vector3(110,0,145)
+        // this.position = new Vector3(0,0,0)
+        this.position = new Vector3(110,0,145)
         // Resource
         this.resource = this.resources.items.halModel
 

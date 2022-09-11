@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Quaternion } from 'three'
 import Experience from '../../Experience'
 
 export default class CharacterControls {
@@ -38,8 +39,7 @@ export default class CharacterControls {
             this.animation.actions.current = newAction
         }
         this.keysPressed = {}
-
-
+        
     }
 
 
@@ -47,12 +47,14 @@ export default class CharacterControls {
     walkDirection = new THREE.Vector3()
     rotateAngle = new THREE.Vector3(0, 1, 0)
     rotateQuarternion = new THREE.Quaternion()
+    rotate = true
 
     // constants
     fadeDuration = 0.2
     runVelocity = 1
     walkVelocity = 0.4
     // delta = player.time.delta
+    
 
 
     update() {
@@ -70,6 +72,7 @@ export default class CharacterControls {
         let delta = this.player.time.delta
 
         let directionOffset = this.directionOffset(this.keysPressed)
+
         // rotate model
         if(directionPressed){
             this.rotateQuarternion.setFromAxisAngle(
@@ -117,13 +120,16 @@ export default class CharacterControls {
 
         if(this.keysPressed[39])
             this.player.position.x-=velocity
+        
+
+
 
         this.animation.play(play)
         this.animation.current = this.animation.actions[play]
     }
 
     directionOffset(keysPressed) {
-        var directionOffset = 0; // w
+        var directionOffset = 0 // w
     
         if (keysPressed[38]) 
         {

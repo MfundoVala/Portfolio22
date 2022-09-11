@@ -37,8 +37,8 @@ export default class Experience
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
-        
         this.world = new World()
+        this.config = {}
 
         this.scene.background = new THREE.Color( 0xffff );
 
@@ -54,6 +54,17 @@ export default class Experience
             if(this.world.player)
             this.world.player.characterControls.keysPressed[event.keyCode] = false
         })
+
+        window.addEventListener('touchstart', () =>
+        {
+            this.config.touch = true
+            this.world.controls.setTouch()
+
+            // this.passes.horizontalBlurPass.strength = 1
+            // this.passes.horizontalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(this.passes.horizontalBlurPass.strength, 0)
+            // this.passes.verticalBlurPass.strength = 1
+            // this.passes.verticalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(0, this.passes.verticalBlurPass.strength)
+        }, { once: true })
 
         // compute mouse position in normalized device coordinates
         // (-1 to +1) for both directions.
