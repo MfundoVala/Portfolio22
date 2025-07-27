@@ -4,8 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mfundonline</title>
+    <style>
+      .controls-overlay {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        font-family: system-ui, -apple-system, sans-serif;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .controls-overlay h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .controls-overlay h3::before {
+        content: "🎮";
+        font-size: 20px;
+      }
+      .controls-overlay ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .controls-overlay li {
+        margin: 0;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .key {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 4px 8px;
+        border-radius: 6px;
+        min-width: 24px;
+        text-align: center;
+        font-weight: 500;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .key-group {
+        display: flex;
+        gap: 4px;
+      }
+      .key-group .key {
+        padding: 4px 6px;
+      }
+      .controls-section {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .controls-section h4 {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    </style>
   </head>
   <body>
     <canvas class="webgl"> </canvas>
+    <div class="controls-overlay">
+      <h3>Controls</h3>
+      <div class="controls-section">
+        <h4>Movement</h4>
+        <ul>
+          <li><span class="key">↑</span> Move Forward</li>
+          <li><span class="key">↓</span> Move Backward</li>
+          <li><span class="key">←</span> Move Left</li>
+          <li><span class="key">→</span> Move Right</li>
+          <li><span class="key">Shift</span> Run</li>
+        </ul>
+      </div>
+      <!-- <div class="controls-section">
+        <h4>Camera</h4>
+        <ul>
+          <li><span class="key">🖱️</span> Look Around</li>
+          <li><span class="key">R</span> Reset View</li>
+          <li><span class="key">F</span> Focus Object</li>
+        </ul>
+      </div> -->
+      <!-- <div class="controls-section">
+        <h4>Actions</h4>
+        <ul>
+          <li><span class="key">Space</span> Interact</li>
+          <li><span class="key">Esc</span> Menu</li>
+          <li><span class="key">H</span> Toggle Help</li>
+        </ul>
+      </div> -->
+    </div>
   </body>
 </html>
